@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://b1h0esug1a3fp"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_34w27"]
+[ext_resource type="PackedScene" uid="uid://bvvhc3r7hnxxg" path="res://dinos/dino.tscn" id="2_pigqn"]
+[ext_resource type="PackedScene" uid="uid://bfr4tjkadcsdi" path="res://world_map.tscn" id="3_jb46f"]
+[ext_resource type="Texture2D" uid="uid://b615dilsm5qkg" path="res://assets/bg/bg1.png" id="3_tbcwi"]
+[ext_resource type="PackedScene" uid="uid://cl1j6n12bdyk1" path="res://traps/tree.tscn" id="4_xkvfv"]
+
+[node name="main" type="Node2D"]
+scale = Vector2(2.5, 2.5)
+script = ExtResource("1_34w27")
+
+[node name="Dino" parent="." instance=ExtResource("2_pigqn")]
+position = Vector2(28.8, 182.8)
+
+[node name="WorldMap" parent="." instance=ExtResource("3_jb46f")]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(1460, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(741.5, 342)
+scale = Vector2(5.13542, 3.25962)
+texture = ExtResource("3_tbcwi")
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Traps" type="Node2D" parent="."]
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="Tree" parent="Traps" instance=ExtResource("4_xkvfv")]
+position = Vector2(285.2, 186.8)
+
+[node name="Tree2" parent="Traps" instance=ExtResource("4_xkvfv")]
+position = Vector2(647.6, 187.6)
+
+[node name="Tree3" parent="Traps" instance=ExtResource("4_xkvfv")]
+position = Vector2(467.6, 190)
+
+[connection signal="body_entered" from="WorldMap" to="." method="_on_world_map_body_entered"]
